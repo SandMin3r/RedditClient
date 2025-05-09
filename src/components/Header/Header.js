@@ -1,19 +1,37 @@
 import './Header.css';
 import { FaReddit, FaSearch } from "react-icons/fa";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { searchRedditPosts, getSubredditPosts } from '../../store/redditSlice';
 
 export const Header = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm.startsWith('r/')) {
+            const subreddit = searchTerm.split('r/')[1];
+            dispatch(getSubredditPosts(subreddit));
+        } else {
+            dispatch(searchRedditPosts(searchTerm));
+        }
+    };
+
     return (
         <header>
             <div className='redditMinimal-logo'>
                 <FaReddit className='reddit-logo' />
                 <h1>Reddit<span className='black'>Minimal</span></h1>
             </div>
-            <form className='searchbar'>
+            <form className='searchbar' onSubmit={handleSearch}>
                 <input
                     type="text"
                     placeholder="search"
-                ></input>
-                <button>
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="submit">
                     <FaSearch className='search-logo' />
                 </button>
             </form>

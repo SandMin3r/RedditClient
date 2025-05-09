@@ -1,0 +1,53 @@
+.post {
+    display: flex;
+    background-color: var(--background-2);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--radius-2);
+    margin-bottom: 16px;
+}
+
+.post form{
+    padding: 16px;
+}
+
+.post form button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--font-color-1);
+    font-size: 1.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post form p {
+    text-align: center;
+}
+
+.post-container {
+    width: 100%;
+    padding-right: 16px;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--font-color-1);
+    padding: 8px;
+}
+
+.post-footer button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--font-color-1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+}

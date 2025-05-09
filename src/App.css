@@ -6,9 +6,6 @@
 
 main {
   grid-column: auto;
-  background-color: var(--background-2);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--radius-2);
 }
 
 aside {
