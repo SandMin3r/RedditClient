@@ -1,4 +1,20 @@
 .comment {
     background-color: var(--background-3);
     border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.comment-author {
+    color: var(--font-color-2);
+    font-weight: bold;
+}
+
+.comment-body {
+    padding-left: 16px;
+}
+
+.comment p {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
