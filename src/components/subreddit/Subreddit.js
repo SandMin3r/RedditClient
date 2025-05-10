@@ -4,18 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
     selectSubreddits, 
     getPopularSubreddits,
-    getSubredditPosts
+    getSubredditPosts,
+    selectCurrentSubreddit,
+    setCurrentSubreddit
 } from '../../store/redditSlice';
 
 export const Subreddit = () => {
     const dispatch = useDispatch();
     const subreddits = useSelector(selectSubreddits);
+    const currentSubreddit = useSelector(selectCurrentSubreddit);
 
     useEffect(() => {
         dispatch(getPopularSubreddits());
     }, [dispatch]);
 
     const handleSubredditClick = (subreddit) => {
+        dispatch(setCurrentSubreddit(subreddit));
         dispatch(getSubredditPosts(subreddit));
     };
 
@@ -26,12 +30,12 @@ export const Subreddit = () => {
                 {subreddits.map((sub) => (
                     <div 
                         key={sub.id} 
-                        className="subreddit-item"
+                        className={`subreddit-item ${currentSubreddit === sub.display_name ? 'active' : ''}`}
                         onClick={() => handleSubredditClick(sub.display_name)}
                     >
                         <img 
-                            src={sub.icon_img || 'https://via.placeholder.com/30'} 
-                            alt="subreddit logo" 
+                            src={sub.icon_img || '../../../public/faReddit.svg'}
+                            alt="" 
                             className="subreddit-icon"
                         />
                         <p>r/{sub.display_name}</p>

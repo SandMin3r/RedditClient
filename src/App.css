@@ -4,13 +4,10 @@
   gap: 16px;
 }
 
-main {
+main, aside {
   grid-column: auto;
 }
 
-aside {
-  grid-column: auto;
-  background-color: var(--background-2);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--radius-2);
+main {
+  padding-left: 16px;
 }

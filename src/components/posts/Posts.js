@@ -1,6 +1,8 @@
 import { FaArrowUp, FaArrowDown, FaCommentAlt } from "react-icons/fa";
+import { formatDistanceToNow } from 'date-fns';
 import './Posts.css';
-import React, { useEffect } from 'react';
+import numeral from "numeral";
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
     getSubredditPosts, 
@@ -47,13 +49,18 @@ const PostItem = ({ post }) => {
     }
   };
 
+  const postTime = formatDistanceToNow(
+        new Date(post.created_utc * 1000), // Convert to milliseconds
+        { addSuffix: true } // Adds "ago" to the end
+  );
+
   return (
     <div className="post">
       <form>
         <button>
           <FaArrowUp />
         </button>
-        <p>{post.ups}</p>
+        <p>{numeral(post.ups).format('0.[0]a')}</p>
         <button>
           <FaArrowDown />
         </button>
@@ -64,7 +71,8 @@ const PostItem = ({ post }) => {
             <img src={post.url} alt="post content" className="post-image" />
           )}
         <div className="post-footer">
-          <span>Posted by u/{post.author}</span>
+          <span>u/{post.author}</span>
+          <span>{postTime}</span>
             <button onClick={toggleComments}>
               <FaCommentAlt />
               <span>{post.num_comments}</span>

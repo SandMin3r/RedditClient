@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import './Comments.css';
 import { 
   selectComments, 
   selectCurrentPost, 
@@ -12,20 +13,12 @@ const Comments = () => {
   const currentPost = useSelector(selectCurrentPost);
   const isLoading = useSelector(selectIsLoading);
 
-  const handleClose = () => {
-    dispatch(clearComments());
-  };
-
   if (!currentPost) return null;
 
   if (isLoading) return <div>Loading comments...</div>;
 
   return (
     <div className="comments-container">
-      <div className="comments-header">
-        <h2>Comments for: {currentPost.title}</h2>
-        <button onClick={handleClose}>Close</button>
-      </div>
       <div className="comments-list">
         {comments.map(comment => (
           <CommentItem key={comment.id} comment={comment} />

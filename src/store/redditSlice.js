@@ -48,13 +48,17 @@ const redditSlice = createSlice({
     searchResults: [],
     isLoading: false,
     hasError: false,
-    error: null
+    error: null,
+    currentSubreddit: '',
   },
   reducers: {
     clearComments(state) {
       state.comments = [];
       state.currentPost = null;
-    }
+    },
+    setCurrentSubreddit: (state, action) => {
+      state.currentSubreddit = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -67,6 +71,7 @@ const redditSlice = createSlice({
         state.isLoading = false;
         state.hasError = false;
         state.posts = action.payload;
+        state.currentSubreddit = action.meta.arg;
       })
       .addCase(getSubredditPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -125,7 +130,7 @@ const redditSlice = createSlice({
   }
 });
 
-export const { clearComments } = redditSlice.actions;
+export const { clearComments, setCurrentSubreddit } = redditSlice.actions;
 
 export const selectPosts = (state) => state.reddit.posts;
 export const selectComments = (state) => state.reddit.comments;
@@ -135,5 +140,6 @@ export const selectSearchResults = (state) => state.reddit.searchResults;
 export const selectIsLoading = (state) => state.reddit.isLoading;
 export const selectHasError = (state) => state.reddit.hasError;
 export const selectError = (state) => state.reddit.error;
+export const selectCurrentSubreddit = (state) => state.reddit.currentSubreddit;
 
 export default redditSlice.reducer;

@@ -23,6 +23,7 @@
 
 .post form p {
     text-align: center;
+    margin: 0.4em;
 }
 
 .post-container {
@@ -30,10 +31,15 @@
     padding-right: 16px;
 }
 
+.post-container h2 {
+    font-weight: 600;
+    color: var(--font-color-2);
+}
+
 .post-footer {
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid var(--font-color-1);
+    border-top: 1px solid rgb(211, 211, 211, 0.7);
     padding: 8px;
 }
 
@@ -50,4 +56,5 @@
 .post-image {
     width: 100%;
     height: auto;
+    border-radius: 4px;
 }
