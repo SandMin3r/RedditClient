@@ -5,12 +5,14 @@ import numeral from "numeral";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Comments from "../comments/Comments";
+import { getSubredditPosts, selectPosts, selectPostsLoading, selectPostsError } from "../../store/postsSlice";
+import { getPostComments, clearComments } from "../../store/commentsSlice";
 
 export const Posts = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
-  const isLoading = useSelector(selectIsLoading);
-  const hasError = useSelector(selectHasError);
+  const isLoading = useSelector(selectPostsLoading);
+  const hasError = useSelector(selectPostsError);
 
   useEffect(() => {
     dispatch(getSubredditPosts('AskReddit')); // Default subreddit
@@ -30,7 +32,7 @@ export const Posts = () => {
 
 const PostItem = ({ post }) => {
   const dispatch = useDispatch();
-  const currentPost = useSelector(state => state.reddit.currentPost);
+  const currentPost = useSelector(state => state.comments.currentPost);
   const showComments = currentPost?.id === post.id;
 
   const toggleComments = () => {

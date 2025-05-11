@@ -1,13 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './Comments.css';
+// Update selector imports
+import { selectComments, selectCommentsLoading } from '../../store/commentsSlice';
 
 const Comments = () => {
-  const dispatch = useDispatch();
   const comments = useSelector(selectComments);
-  const currentPost = useSelector(selectCurrentPost);
-  const isLoading = useSelector(selectIsLoading);
-
-  if (!currentPost) return null;
+  const isLoading = useSelector(selectCommentsLoading);
 
   if (isLoading) return <div>Loading comments...</div>;
 

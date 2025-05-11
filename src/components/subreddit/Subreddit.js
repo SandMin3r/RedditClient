@@ -2,6 +2,8 @@ import './Subreddit.css';
 import { FaReddit } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectSubreddits, selectCurrentSubreddit, getPopularSubreddits, setCurrentSubreddit} from '../../store/subredditsSlice';
+import { getSubredditPosts } from '../../store/postsSlice';
 
 export const Subreddit = () => {
     const dispatch = useDispatch();
