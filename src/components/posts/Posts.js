@@ -101,7 +101,7 @@ const PostItem = ({ post }) => {
         return (
           <div className="post-error">
             Could not display this content. 
-            <a href={`https://reddit.com${post.permalink}`} target="_blank" rel="noopener">View on Reddit</a>
+            <a href={`https://reddit.com${post.permalink}`} target="_blank" rel="noreferrer">View on Reddit</a>
           </div>
         );
     }
