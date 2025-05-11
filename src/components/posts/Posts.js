@@ -36,6 +36,83 @@ const PostItem = ({ post }) => {
   const currentPost = useSelector(state => state.comments.currentPost);
   const showComments = currentPost?.id === post.id;
 
+  const renderMedia = () => {
+    try {
+      // 1. Image posts
+      if (post.post_hint === 'image' || (post.url?.match(/\.(jpg|png|gif)$/i))) {
+        return <img src={post.url} alt="post content" className="post-image" />;
+      };
+
+      // 2. Video posts (Reddit hosted)
+      if (post.is_video && post.media?.reddit_video?.fallback_url) {
+        return (
+          <video controls className="post-video">
+            <source src={post.media.reddit_video.fallback_url} type="video/mp4" />
+              Your browser doesn't support HTML5 video.
+          </video>
+        );
+      };
+
+      // 3. Gallery posts (with safe access)
+      if (post.is_gallery && post.gallery_data?.items && post.media_metadata) {
+        return (
+          <div className="post-gallery">
+            {post.gallery_data.items.map(item => {
+              const media = post.media_metadata[item.media_id];
+              const source = media?.s?.u || media?.p?.find(p => p.x === media.s.x)?.u;
+              return source ? (
+                <img 
+                  key={item.id}
+                  src={source.replace(/&amp;/g, '&')} 
+                  alt={`Gallery item ${item.id}`}
+                />
+              ) : null;
+            })}
+          </div>
+        );
+      };
+
+      // 4. External video embeds
+      if (post.post_hint === 'rich:video' && post.url) {
+        if (post.url.includes('youtube.com') || post.url.includes('youtu.be')) {
+          return (
+            <div className="embed-container">
+              <iframe 
+                src={`https://www.youtube.com/embed/${getYouTubeId(post.url)}`}
+                title="YouTube video"
+                allowFullScreen
+              />
+            </div>
+          );
+        }
+            // Add other embed types here (Twitter, Vimeo, etc.)
+      };
+
+        // 5. Text posts
+      if (post.selftext) {
+        return <div className="post-text">{post.selftext}</div>;
+      }
+
+      // 6. fallback
+      return
+
+    } catch (error) {
+        console.error('Error rendering media:', error);
+        return (
+          <div className="post-error">
+            Could not display this content. 
+            <a href={`https://reddit.com${post.permalink}`} target="_blank" rel="noopener">View on Reddit</a>
+          </div>
+        );
+    }
+  };
+
+  const getYouTubeId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
   const toggleComments = () => {
     if (showComments) {
       dispatch(clearComments());
@@ -46,7 +123,7 @@ const PostItem = ({ post }) => {
 
   const handleVote = (e, direction) => {
     e.preventDefault();
-    console.log(direction); // Vote functionality is out of scope
+    console.log(direction); // Vote functionality is out of scope for now
   }
 
   const postTime = formatDistanceToNow(
@@ -67,9 +144,7 @@ const PostItem = ({ post }) => {
       </div>
       <div className="post-container">
         <h2>{post.title}</h2>
-          {post.url && (post.url.endsWith('.jpg') || post.url.endsWith('.png')) && (
-            <img src={post.url} alt="post content" className="post-image" />
-          )}
+        {renderMedia()}
         <div className="post-footer">
           <span>u/{post.author}</span>
           <span>{postTime}</span>

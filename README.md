@@ -24,21 +24,6 @@ A lightweight Reddit client built with React and Redux, featuring real-time post
 
 You can see the app running at: (pending)
 
-## Project Structure
-
-src/
-├── api/                 # Reddit API service
-├── components/          # Reusable components
-│   ├── comments/        # Comment-related components
-│   ├── header/          # Header component
-│   ├── posts/           # Post-related components
-│   └── subreddit/       # Subreddit sidebar
-├── store/               # Redux store configuration
-│   ├── postsSlice.js    # Posts and search state
-│   ├── commentsSlice.js # Comments state
-│   └── store.js         # Store setup
-└── App.js               # Main application component
-
 ## Redux State Management
 
 The app uses Redux Toolkit with these slices:
@@ -60,13 +45,12 @@ The app uses Redux Toolkit with these slices:
    - Handles loading states for subreddit list
 
 ## Future Improvements
-    -Add user authentication
-    -Implement voting functionality
-    -Add dark mode
-    -Create saved posts feature
-    -Add infinite scrolling
+
+1. Add user authentication
+2. Implement voting functionality
+3. Add infinite scrolling
 
 ## API Usage
 This app uses Reddit's public API Base URL: https://www.reddit.com 
-No authentication required for read operations 
+No authentication required for read operations.
 Rate limited to ~60 requests per minute.
