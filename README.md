@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Reddit Minimal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A lightweight Reddit client built with React and Redux, featuring real-time post browsing, comments, and search functionality. I made this to practice making a react-redux app
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🏠 Browse popular subreddits
+- 🔍 Search across all of Reddit
+- 💬 View and toggle comments
+- 🕒 Relative timestamps for posts
+- 🎨 Clean, minimalist UI
+- ⚡ Redux-powered state management
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React (Create React App)
+- Redux Toolkit
+- React Icons
+- date-fns (for time formatting)
+- Axios (for API calls)
+- CSS Modules
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Take a look
 
-### `npm test`
+You can see the app running at: (pending)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+src/
+├── api/                 # Reddit API service
+├── components/          # Reusable components
+│   ├── comments/        # Comment-related components
+│   ├── header/          # Header component
+│   ├── posts/           # Post-related components
+│   └── subreddit/       # Subreddit sidebar
+├── store/               # Redux store configuration
+│   ├── postsSlice.js    # Posts and search state
+│   ├── commentsSlice.js # Comments state
+│   └── store.js         # Store setup
+└── App.js               # Main application component
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Redux State Management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app uses Redux Toolkit with these slices:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Posts Slice**
+   - Manages both subreddit posts and search results
+   - Tracks current subreddit and search queries
+   - Handles loading states for all post-related operations
 
-### `npm run eject`
+2. **Comments Slice**
+   - Manages comment threads
+   - Toggles comment visibility
+   - Handles comment loading states
+   - Tracks current post being viewed
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Subreddits Slice**
+   - Manages the list of popular subreddits
+   - Tracks the currently selected subreddit
+   - Handles loading states for subreddit list
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Future Improvements
+    -Add user authentication
+    -Implement voting functionality
+    -Add dark mode
+    -Create saved posts feature
+    -Add infinite scrolling
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## API Usage
+This app uses Reddit's public API Base URL: https://www.reddit.com 
+No authentication required for read operations 
+Rate limited to ~60 requests per minute.
