@@ -1,11 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import './Comments.css';
-import { 
-  selectComments, 
-  selectCurrentPost, 
-  selectIsLoading, 
-  clearComments 
-} from '../../store/redditSlice';
 
 const Comments = () => {
   const dispatch = useDispatch();

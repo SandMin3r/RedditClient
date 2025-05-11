@@ -1,13 +1,7 @@
 import './Subreddit.css';
+import { FaReddit } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { 
-    selectSubreddits, 
-    getPopularSubreddits,
-    getSubredditPosts,
-    selectCurrentSubreddit,
-    setCurrentSubreddit
-} from '../../store/redditSlice';
 
 export const Subreddit = () => {
     const dispatch = useDispatch();
@@ -33,11 +27,7 @@ export const Subreddit = () => {
                         className={`subreddit-item ${currentSubreddit === sub.display_name ? 'active' : ''}`}
                         onClick={() => handleSubredditClick(sub.display_name)}
                     >
-                        <img 
-                            src={sub.icon_img || '../../../public/faReddit.svg'}
-                            alt="" 
-                            className="subreddit-icon"
-                        />
+                        {sub.icon_img ? <img src={sub.icon_img} alt='' className='subreddit-icon' /> : <FaReddit className='subreddit-icon' />}
                         <p>r/{sub.display_name}</p>
                     </div>
                 ))}

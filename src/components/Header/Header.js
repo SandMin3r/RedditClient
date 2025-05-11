@@ -2,7 +2,6 @@ import './Header.css';
 import { FaReddit, FaSearch } from "react-icons/fa";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchRedditPosts, getSubredditPosts } from '../../store/redditSlice';
 
 export const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');

@@ -4,14 +4,6 @@ import './Posts.css';
 import numeral from "numeral";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { 
-    getSubredditPosts, 
-    selectPosts, 
-    selectIsLoading, 
-    selectHasError,
-    getPostComments,
-    clearComments
-} from "../../store/redditSlice";
 import Comments from "../comments/Comments";
 
 export const Posts = () => {
@@ -49,6 +41,11 @@ const PostItem = ({ post }) => {
     }
   };
 
+  const handleVote = (e, direction) => {
+    e.preventDefault();
+    console.log(direction); // Vote functionality is out of scope
+  }
+
   const postTime = formatDistanceToNow(
         new Date(post.created_utc * 1000), // Convert to milliseconds
         { addSuffix: true } // Adds "ago" to the end
@@ -56,15 +53,15 @@ const PostItem = ({ post }) => {
 
   return (
     <div className="post">
-      <form>
-        <button>
+      <div className="vote-container">
+        <button onClick={(e) => handleVote(e, 'up')}>
           <FaArrowUp />
         </button>
         <p>{numeral(post.ups).format('0.[0]a')}</p>
-        <button>
+        <button onClick={(e) => handleVote(e, 'down')}>
           <FaArrowDown />
         </button>
-      </form>
+      </div>
       <div className="post-container">
         <h2>{post.title}</h2>
           {post.url && (post.url.endsWith('.jpg') || post.url.endsWith('.png')) && (

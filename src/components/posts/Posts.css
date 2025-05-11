@@ -6,11 +6,11 @@
     margin-bottom: 16px;
 }
 
-.post form{
+.post .vote-container {
     padding: 16px;
 }
 
-.post form button {
+.post .vote-container button {
     background: none;
     border: none;
     cursor: pointer;
@@ -21,7 +21,7 @@
     justify-content: center;
 }
 
-.post form p {
+.post .vote-container p {
     text-align: center;
     margin: 0.4em;
 }
