@@ -2,7 +2,7 @@ import './Header.css';
 import { FaReddit, FaSearch } from "react-icons/fa";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchRedditPosts, getSubredditPosts } from '../../store/searchSlice';
+import { getSubredditPosts, searchRedditPosts } from '../../store/postsSlice';
 
 export const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -10,12 +10,14 @@ export const Header = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
+
         if (searchTerm.startsWith('r/')) {
             const subreddit = searchTerm.split('r/')[1];
             dispatch(getSubredditPosts(subreddit));
         } else {
             dispatch(searchRedditPosts(searchTerm));
         }
+        setSearchTerm('');
     };
 
     return (
@@ -27,7 +29,7 @@ export const Header = () => {
             <form className='searchbar' onSubmit={handleSearch}>
                 <input
                     type="text"
-                    placeholder="search"
+                    placeholder="Search"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />

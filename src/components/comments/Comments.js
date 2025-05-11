@@ -1,29 +1,28 @@
-import { useSelector } from 'react-redux';
 import './Comments.css';
-// Update selector imports
+import { useSelector } from 'react-redux';
 import { selectComments, selectCommentsLoading } from '../../store/commentsSlice';
 
 const Comments = () => {
   const comments = useSelector(selectComments);
   const isLoading = useSelector(selectCommentsLoading);
 
-  if (isLoading) return <div>Loading comments...</div>;
-
   return (
     <div className="comments-container">
-      <div className="comments-list">
-        {comments.map(comment => (
+      {isLoading ? (
+        <div className="loading-comments">Loading comments...</div>
+      ) : (
+        comments.map(comment => (
           <CommentItem key={comment.id} comment={comment} />
-        ))}
-      </div>
+        ))
+      )}
     </div>
   );
 };
 
 const CommentItem = ({ comment }) => {
-  if (comment.body === '[deleted]' || comment.body === '[removed]') {
+  if (comment.body === '[deleted]' || comment.body === '[removed]' || comment.body === '[eliminado]') {
     return null;
-  }
+  };
 
   return (
     <div className="comment">

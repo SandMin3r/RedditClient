@@ -5,12 +5,13 @@ import numeral from "numeral";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Comments from "../comments/Comments";
-import { getSubredditPosts, selectPosts, selectPostsLoading, selectPostsError } from "../../store/postsSlice";
 import { getPostComments, clearComments } from "../../store/commentsSlice";
+import { selectAllPosts, selectPostsLoading, selectPostsError, getSubredditPosts } from "../../store/postsSlice";
+
 
 export const Posts = () => {
   const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
+  const posts = useSelector(selectAllPosts);
   const isLoading = useSelector(selectPostsLoading);
   const hasError = useSelector(selectPostsError);
 

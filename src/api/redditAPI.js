@@ -39,6 +39,7 @@ export const fetchPopularSubreddits = async () => {
 export const searchPosts = async (query) => {
   try {
     const response = await axios.get(`${BASE_URL}/search.json?q=${query}`);
+    console.log(response.data.data.children.map(post => post.data));
     return response.data.data.children.map(post => post.data);
   } catch (error) {
     console.error('Error searching posts:', error);
