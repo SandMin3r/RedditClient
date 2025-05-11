@@ -22,7 +22,7 @@ A lightweight Reddit client built with React and Redux, featuring real-time post
 
 ## Take a look
 
-You can see the app running at: (pending)
+You can see the app running at: https://redditsand.netlify.app/
 
 ## Redux State Management
 
