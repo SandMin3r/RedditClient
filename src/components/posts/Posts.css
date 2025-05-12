@@ -29,6 +29,7 @@
 .post-container {
     width: 100%;
     padding-right: 16px;
+    padding-left: 16px;
 }
 
 .post-container h2 {
@@ -85,10 +86,10 @@
 
 .post-text {
     width: 100%;
-    padding: 12px;
+    padding: 16px;
     background: #f8f9fa;
     border-radius: 4px;
-    margin: 8px 0;
+    margin: 8px;
     line-height: 1.5;
 }
 
@@ -97,7 +98,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 8px;
-    margin: 8px 0;
+    margin: 8px;
 }
 
 .post-gallery img {
